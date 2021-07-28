@@ -40,11 +40,55 @@
 
 ## Definição
 
-Arquivo onde estão definidas e armazenadas todas as configurações do servidor PostgreSQL.
+​	Arquivo onde estão definidas e armazenadas todas as configurações do servidor PostgreSQL.
 
-Alguns parâmetros só podem ser 
+​	Alguns parâmetros só podem ser alterados com uma reinicialização do banco de dados.
+
+​	A view pg_settings, acessada por dentro do banco de dados, guarda todas as configurações atuais.
+
+​		**SELECT name, setting**
+
+​		**FROM pg_settings;**
+
+​	Ou: **SHOW [parâmetro];**
 
 ## Postgresql.conf
 
-- Por padrão, encontra-se dentro do diretório PGDA
+- Por padrão, o arquivo encontra-se dentro do diretório PGDATA definido no momento da inicialização do cluster de banco de dados.
+
+- No sistema operacional Ubuntu, se o SQL foi instalado a partir do repositório oficial, o local será:
+
+  ​	etc/postgresql/[versão]/[nome do cluster]/postgresql.conf 
+
+## Configurações de conexão :red_circle:
+
+- ### *LISTEN_ADDRESSES*
+
+  ​	Endereços TCP/IP das interfaces que o servidor SQL vai escutar/liberar conexões.
+
+- ### *PORT*
+
+  ​	A porta TCP que o servidor SQL vai ouvir. O padrão é 5432.
+
+- ### *MAX_CONNECTIONS*
+
+  ​	Número máximo de conexões simultaneas no servidor SQL
+
+- ### *SUPERUSER_RESERVED_CONNECTIONS*
+
+  ​	Número de conexões (slots) reservados para conexões do banco de dados de super usuários.
+
+  ## Configurações de autenticação :lock:
+
+- ### *AUTHENTICATIONC_TIMEOUT*
+
+  ​	Tempo máximo em segundos para o cliente conseguir uma conexão com o servidor.
+
+- ### *PASSWORD_ENCRYPTION*
+
+  ​	Algoritmo de criptográfia das senhas dos novos usuários criados no BC.
+
+- ### *SSL*
+
+  ​	Habilita a conexão criptografada por SSL (Somente de se o PGSQL foi compilado som suporte SSL)
 
